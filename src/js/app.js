@@ -26,14 +26,12 @@ async function firstLoadImages() {
 
   await createImage(data);
   setIsFirstIteration(false);
-  console.log(isFirstIteration);
 
   observer.observe(observerEl); // Observe the element after loading all images from first iteration
 }
 
 async function loadMoreImage() {
   setNextPage();
-  console.log(page);
 
   const data = await getJSON(
     currentSearchTerm
@@ -43,7 +41,6 @@ async function loadMoreImage() {
 
   const moreImgsArr = currentSearchTerm ? data.results : data;
   createImage(moreImgsArr);
-  console.log(isFirstIteration);
 }
 
 function loadMore(entries) {
