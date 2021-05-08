@@ -26,7 +26,7 @@ function createImage(images) {
           (img.height / img.width) * 100
         }%; background-color: ${img.color};">
           <img
-            src="${img.urls.full}"
+            src="${img.urls.regular}"
             alt="${img.alt_description}"
             loading="lazy"
           />
@@ -36,7 +36,6 @@ function createImage(images) {
             src="${img.user.profile_image.small}"
             alt="${img.user.name}"
             class="image__profile"
-            loading="lazy"
           />
           <h3 class="image__author">${img.user.name}</h3>
           <a href="${img.links.download}?force=true" class="image__download">
@@ -69,13 +68,11 @@ async function fetchImage() {
 
 async function loadMoreImage() {
   page++;
-  console.log(page);
   const data = await getJSON(
     currentSearchTerm
       ? `${SEARCH_PATH}&page=${page}&per_page=${PER_PAGE}&query=${currentSearchTerm}`
       : `${API_PATH}&page=${page}&per_page=${PER_PAGE}`
   );
-  console.log(data);
   createImage(currentSearchTerm ? data.results : data);
 }
 
@@ -89,7 +86,7 @@ function loadMore(entries) {
 const observer = new IntersectionObserver(loadMore, {
   root: null,
   threshold: 0.1,
-  rootMargin: '200px',
+  rootMargin: '2500px',
 });
 
 function showBtn(entries) {
