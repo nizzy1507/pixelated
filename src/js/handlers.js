@@ -23,11 +23,13 @@ export async function handleSubmit(e) {
 }
 
 export function changeShadow(e) {
-  e.target.parentElement.style.boxShadow = `0 0px 8px 2px rgba(254, 12, 107, 0.3)`;
+  e.target.closest(
+    '.search'
+  ).style.boxShadow = `0 0px 8px 2px rgba(254, 12, 107, 0.3)`;
 }
 
 export function removeShadow(e) {
-  e.target.parentElement.style.boxShadow = `0 4px 10px rgba(0, 0, 0, 0.2)`;
+  e.target.closest('.search').style.boxShadow = `0 4px 10px rgba(0, 0, 0, 0.2)`;
 }
 
 // export { handleSubmit, changeShadow, removeShadow };

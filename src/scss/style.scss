@@ -105,14 +105,17 @@ a {
 
   &__input {
     flex: 1;
-    display: inline-block;
-    font-family: inherit;
-    border: none;
-    font-size: 1.8rem;
-  }
 
-  &__input:focus {
-    outline: none;
+    & input {
+      width: 100%;
+      font-family: inherit;
+      border: none;
+      font-size: 1.8rem;
+    }
+
+    & input:focus {
+      outline: none;
+    }
   }
 
   &__btn {
