@@ -1,15 +1,15 @@
 import { API_PATH, PER_PAGE, SEARCH_PATH } from './config';
-import { getJSON } from './helpers';
-import { handleSubmit, changeShadow, removeShadow } from './handlers';
+import { getJSON, clearColumns } from './helpers';
+import { changeShadow, removeShadow } from './handlers';
 
 const header = document.querySelector('.header');
 const imageColumns = document.querySelectorAll('.images__column');
-const imagesContainer = document.querySelector('.images');
 const observerEl = document.querySelector('.observer');
 const searchForm = document.querySelector('.search');
-const modal = document.querySelector('.modal');
+// const modal = document.querySelector('.modal');
 const searchInput = searchForm.searchString;
 const backToTopBtn = document.querySelector('.top__btn');
+const headerTitle = document.querySelector('.header__title span');
 
 const images = [];
 
@@ -81,6 +81,24 @@ function loadMore(entries) {
   if (entry.isIntersecting) {
     loadMoreImage();
   }
+}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const { value } = e.target.searchString;
+  currentSearchTerm = value;
+
+  const capitalizeValue = value.slice(0, 1).toUpperCase() + value.slice(1);
+  headerTitle.textContent = capitalizeValue;
+  document.title = capitalizeValue;
+
+  const { results } = await getJSON(
+    `${SEARCH_PATH}&page=1&per_page=${PER_PAGE}&query=${value}`
+  );
+  clearColumns();
+  e.target.searchString.value = '';
+  e.target.searchString.blur();
+  createImage(results);
 }
 
 const observer = new IntersectionObserver(loadMore, {

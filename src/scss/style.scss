@@ -235,6 +235,7 @@ a {
     transition: opacity 0.25s linear;
     transform: translateY(calc(100% + 5rem));
     transition: transform 0.25s linear;
+    z-index: 10;
 
     &.show {
       transform: translateY(0);

@@ -1,9 +1,3 @@
-const headerTitle = document.querySelector('.header__title span');
-
-function clearColumns() {
-  imageColumns.forEach(column => (column.innerHTML = ''));
-}
-
 export async function handleSubmit(e) {
   e.preventDefault();
   const { value } = e.target.searchString;
