@@ -2,12 +2,14 @@ import { API_PATH, PER_PAGE, SEARCH_PATH } from './config';
 import { getJSON } from './helpers';
 import { handleSubmit, changeShadow, removeShadow } from './handlers';
 
+const header = document.querySelector('.header');
 const imageColumns = document.querySelectorAll('.images__column');
 const imagesContainer = document.querySelector('.images');
 const observerEl = document.querySelector('.observer');
 const searchForm = document.querySelector('.search');
 const modal = document.querySelector('.modal');
 const searchInput = searchForm.searchString;
+const backToTopBtn = document.querySelector('.top__btn');
 
 const images = [];
 
@@ -90,6 +92,21 @@ const observer = new IntersectionObserver(loadMore, {
   rootMargin: '200px',
 });
 
+function showBtn(entries) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) {
+    backToTopBtn.classList.add('show');
+  } else {
+    backToTopBtn.classList.remove('show');
+  }
+}
+
+const backToTopBtnObserver = new IntersectionObserver(showBtn, {
+  root: null,
+  threshold: 0,
+});
+
+backToTopBtnObserver.observe(header);
 // function handleModal(e) {
 //   if (e.key === 'ArrowRight') {
 //     currentModalImage++;

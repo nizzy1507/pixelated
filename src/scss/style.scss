@@ -232,6 +232,12 @@ a {
     color: $color-white;
     opacity: 0.3;
     transition: opacity 0.25s linear;
+    transform: translateY(calc(100% + 5rem));
+    transition: transform 0.25s linear;
+
+    &.show {
+      transform: translateY(0);
+    }
   }
 
   &__btn:hover {
