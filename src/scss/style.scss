@@ -42,7 +42,11 @@ a {
   margin: 0 auto;
   padding-left: $padding;
   padding-right: $padding;
-  padding-top: 10rem;
+  margin-top: 8rem;
+
+  @media screen and (max-width: 767px) {
+    margin-top: 5rem;
+  }
 
   &__title {
     display: flex;
@@ -89,6 +93,28 @@ a {
     span {
       margin: 0.5rem;
       font-weight: 500;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 1.6rem;
+
+      i {
+        font-size: 1.6rem;
+      }
+
+      .bxs-heart {
+        color: #fe0c6b;
+      }
+
+      .bx-code-alt {
+        color: #13d2b8;
+        font-size: 2rem;
+      }
+
+      span {
+        margin: 0.5rem;
+        font-weight: 500;
+      }
     }
   }
 }
@@ -140,6 +166,7 @@ a {
   margin: 5rem auto 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  align-items: start;
   gap: 2.4rem;
 }
 
@@ -147,6 +174,7 @@ a {
   position: relative;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 0 4px rgb(0, 0, 0, 0.1);
 
   &__container {
     position: relative;

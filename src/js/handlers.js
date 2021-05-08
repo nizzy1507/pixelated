@@ -1,19 +1,45 @@
-export async function handleSubmit(e) {
-  e.preventDefault();
-  const { value } = e.target.searchString;
-  currentSearchTerm = value;
+import {
+  PER_PAGE,
+  SEARCH_PATH,
+  setNextPage,
+  setCurrentSearchTerm,
+  setIsFirstIteration,
+} from './config';
+import { createImage } from './createImage';
 
-  const capitalizeValue = value.slice(0, 1).toUpperCase() + value.slice(1);
+import { headerTitle } from './elements';
+import { getJSON } from './helpers';
+
+function clearColumns() {
+  document
+    .querySelectorAll('.images__column')
+    .forEach(column => (column.innerHTML = ''));
+}
+
+export async function searchHandler(e) {
+  e.preventDefault();
+  setNextPage(true);
+  setIsFirstIteration(true);
+
+  const { value } = e.target.searchString;
+  setCurrentSearchTerm(value);
+
+  // Change header logo title to search value
+  const capitalizeValue = value[0].toUpperCase() + value.slice(1);
   headerTitle.textContent = capitalizeValue;
   document.title = capitalizeValue;
 
   const { results } = await getJSON(
     `${SEARCH_PATH}&page=1&per_page=${PER_PAGE}&query=${value}`
   );
+
   clearColumns();
+
   e.target.searchString.value = '';
   e.target.searchString.blur();
-  createImage(results);
+
+  await createImage(results);
+  setIsFirstIteration(false);
 }
 
 export function changeShadow(e) {
@@ -25,5 +51,3 @@ export function changeShadow(e) {
 export function removeShadow(e) {
   e.target.closest('.search').style.boxShadow = `0 4px 10px rgba(0, 0, 0, 0.2)`;
 }
-
-// export { handleSubmit, changeShadow, removeShadow };
