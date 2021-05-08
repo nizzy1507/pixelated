@@ -1,2 +1,2 @@
 # pixelated
-A web using Unsplash API to search for high-quality photos
+A web using Unsplash API to search and download high-quality photos
