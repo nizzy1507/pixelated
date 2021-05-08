@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/png" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./scss/style.scss" />
+    <title>Pixelated</title>
+  </head>
+  <body id="top">
+    <header class="header">
+      <h1 class="header__title">
+        <a href="./index.html">
+          <img
+            src="./images/shutter.svg"
+            alt="Logo of Pixelated"
+            class="header__logo"
+          />
+        </a>
+        <span>Pixelated</span>
+      </h1>
+      <h2 class="header__slogan">
+        <i class="bx bx-code-alt"></i>
+        <span>with</span>
+        <i class="bx bxs-heart"></i>
+        <span>by Nguyen Tran</span>
+      </h2>
+      <form name="search" class="search" autocomplete="off">
+        <input
+          type="text"
+          class="search__input"
+          name="searchString"
+          placeholder="Search for high-resolution photos"
+          required
+        />
+        <button type="submit" class="search__btn">
+          <i class="bx bx-search-alt search__icon"></i>
+        </button>
+      </form>
+    </header>
+
+    <div class="images">
+      <div class="images__column"></div>
+      <div class="images__column"></div>
+      <div class="images__column"></div>
+    </div>
+
+    <div class="observer"></div>
+
+    <div class="top">
+      <a href="#top" class="top__btn">
+        <i class="bx bx-up-arrow-alt"></i>
+      </a>
+    </div>
+
+    <div class="modal">
+      <img
+        src="https://images.unsplash.com/photo-1619783534896-ae45ba5c78d8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+        alt="Red car"
+        class="modal__image"
+      />
+    </div>
+
+    <script src="./js/app.js"></script>
+  </body>
+</html>

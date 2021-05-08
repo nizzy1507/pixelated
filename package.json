@@ -1,0 +1,16 @@
+{
+  "name": "pixelated",
+  "version": "1.0.0",
+  "description": "An application for searching images",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel serve ./src/index.html",
+    "build": "parcel build ./src/index.html "
+  },
+  "author": "Tran Ngoc Chung Nguyen",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.0-beta.2",
+    "parcel": "^2.0.0-beta.2"
+  }
+}
