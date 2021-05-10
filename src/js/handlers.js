@@ -17,29 +17,36 @@ function clearColumns() {
 }
 
 export async function searchHandler(e) {
-  e.preventDefault();
-  setNextPage(true);
-  setIsFirstIteration(true);
+  try {
+    e.preventDefault();
+    setNextPage(true);
+    setIsFirstIteration(true);
 
-  const { value } = e.target.searchString;
-  setCurrentSearchTerm(value);
+    const { value } = e.target.searchString;
+    setCurrentSearchTerm(value);
 
-  // Change header logo title to search value
-  const capitalizeValue = value[0].toUpperCase() + value.slice(1);
-  headerTitle.textContent = capitalizeValue;
-  document.title = capitalizeValue;
+    // Change header logo title to search value
+    const capitalizeValue = value[0].toUpperCase() + value.slice(1);
+    headerTitle.textContent = capitalizeValue;
+    document.title = capitalizeValue;
 
-  const { results } = await getJSON(
-    `${SEARCH_PATH}&page=1&per_page=${PER_PAGE}&query=${value}`
-  );
+    const { results } = await getJSON(
+        `${SEARCH_PATH}&page=1&per_page=${PER_PAGE}&query=${value}`
+    );
 
-  clearColumns();
+    if(!results) return;
 
-  e.target.searchString.value = '';
-  e.target.searchString.blur();
+    clearColumns();
 
-  await createImage(results);
-  setIsFirstIteration(false);
+    e.target.searchString.value = '';
+    e.target.searchString.blur();
+
+    await createImage(results);
+    setIsFirstIteration(false);
+  } catch (e) {
+    alert('There is something wrong when fetching images');
+  }
+
 }
 
 export function changeShadow(e) {

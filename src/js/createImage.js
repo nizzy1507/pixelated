@@ -1,7 +1,12 @@
-import { firstCol, secondCol, thirdCol } from './elements';
+import { firstCol, secondCol, thirdCol, fourthCol } from './elements';
 import { isFirstIteration } from './config';
 
 export function createImage(curImgsArr) {
+
+  if(curImgsArr.length === 0) {
+    return;
+  }
+
   curImgsArr.forEach((img, idx) => {
     const html = `
       <div class="image" data-id="${img.id}" data-index="${idx}">
@@ -29,44 +34,63 @@ export function createImage(curImgsArr) {
       </div>
     `;
 
-    const firstColHeight = firstCol.offsetHeight;
-    const secondColHeight = secondCol.offsetHeight;
-    const thirdColHeight = thirdCol.offsetHeight;
+    const firstColHeight = firstCol.getBoundingClientRect().height;
+    const secondColHeight = secondCol.getBoundingClientRect().height;
+    const thirdColHeight = thirdCol.getBoundingClientRect().height;
+    const fourthColHeight = fourthCol.getBoundingClientRect().height;
 
     // Only for first iteration
-    if (idx % 3 === 0 && isFirstIteration) {
+    if (idx % 4 === 0 && isFirstIteration) {
       firstCol.insertAdjacentHTML('beforeend', html);
     }
 
-    if (idx % 3 === 1 && isFirstIteration) {
+    if (idx % 4 === 1 && isFirstIteration) {
       secondCol.insertAdjacentHTML('beforeend', html);
     }
 
-    if (idx % 3 === 2 && isFirstIteration) {
+    if (idx % 4 === 2 && isFirstIteration) {
       thirdCol.insertAdjacentHTML('beforeend', html);
+    }
+
+    if (idx % 4 === 3 && isFirstIteration) {
+      fourthCol.insertAdjacentHTML('beforeend', html);
     }
 
     // Second and later iteration
     if (
-      firstColHeight < secondColHeight &&
-      firstColHeight < thirdColHeight &&
-      !isFirstIteration
+        firstColHeight < secondColHeight &&
+        firstColHeight < thirdColHeight &&
+        firstColHeight < fourthColHeight &&
+        !isFirstIteration
     ) {
       firstCol.insertAdjacentHTML('beforeend', html);
     }
+
     if (
-      secondColHeight < firstColHeight &&
-      secondColHeight < thirdColHeight &&
-      !isFirstIteration
+        secondColHeight < firstColHeight &&
+        secondColHeight < thirdColHeight &&
+        secondColHeight < fourthColHeight &&
+        !isFirstIteration
     ) {
       secondCol.insertAdjacentHTML('beforeend', html);
     }
+
     if (
       thirdColHeight < secondColHeight &&
       thirdColHeight < firstColHeight &&
+      thirdColHeight < fourthColHeight &&
       !isFirstIteration
     ) {
       thirdCol.insertAdjacentHTML('beforeend', html);
+    }
+
+    if (
+      fourthColHeight < secondColHeight &&
+      fourthColHeight < firstColHeight &&
+      fourthColHeight < thirdColHeight &&
+      !isFirstIteration
+    ) {
+      fourthCol.insertAdjacentHTML('beforeend', html);
     }
   });
 }

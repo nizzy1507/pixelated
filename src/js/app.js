@@ -6,7 +6,6 @@ import {
   setNextPage,
   currentSearchTerm,
   setIsFirstIteration,
-  isFirstIteration,
 } from './config';
 
 import { getJSON } from './helpers';
@@ -22,38 +21,51 @@ import {
 import { createImage } from './createImage';
 
 async function firstLoadImages() {
-  const data = await getJSON(`${API_PATH}&page=1&per_page=${PER_PAGE}`);
+  try {
+    const data = await getJSON(`${API_PATH}&page=1&per_page=${PER_PAGE}`);
 
-  await createImage(data);
-  setIsFirstIteration(false);
+    await createImage(data);
+    setIsFirstIteration(false);
 
-  observer.observe(observerEl); // Observe the element after loading all images from first iteration
+    observer.observe(observerEl); // Observe the element after loading all images from first iteration
+  } catch (e) {
+    alert('There is something wrong when fetching images');
+  }
+
+
 }
 
 async function loadMoreImage() {
-  setNextPage();
+  try {
+    setNextPage();
+    console.log('hello');
 
-  const data = await getJSON(
-    currentSearchTerm
-      ? `${SEARCH_PATH}&page=${page}&per_page=${PER_PAGE}&query=${currentSearchTerm}`
-      : `${API_PATH}&page=${page}&per_page=${PER_PAGE}`
-  );
+    const data = await getJSON(
+        currentSearchTerm
+            ? `${SEARCH_PATH}&page=${page}&per_page=${PER_PAGE}&query=${currentSearchTerm}`
+            : `${API_PATH}&page=${page}&per_page=${PER_PAGE}`
+    );
 
-  const moreImgsArr = currentSearchTerm ? data.results : data;
-  createImage(moreImgsArr);
+    const moreImgsArr = currentSearchTerm ? data.results : data;
+
+    if(!moreImgsArr) return;
+
+    createImage(moreImgsArr);
+  } catch (e) {
+    alert('There is something wrong when fetching images');
+  }
+
 }
 
 function loadMore(entries) {
   const [entry] = entries;
-  if (entry.isIntersecting) {
-    loadMoreImage();
-  }
+  if (entry.isIntersecting) loadMoreImage();
 }
 
 const observer = new IntersectionObserver(loadMore, {
   root: null,
-  threshold: 0.1,
-  rootMargin: '2000px',
+  threshold: 0.5,
+  rootMargin: '1500px',
 });
 
 function showBackToTopBtn(entries) {

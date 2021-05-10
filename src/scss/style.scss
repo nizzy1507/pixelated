@@ -42,10 +42,10 @@ a {
   margin: 0 auto;
   padding-left: $padding;
   padding-right: $padding;
-  margin-top: 8rem;
+  padding-top: 8rem;
 
   @media screen and (max-width: 767px) {
-    margin-top: 5rem;
+    padding-top: 4rem;
   }
 
   &__title {
@@ -64,18 +64,30 @@ a {
       color: transparent;
       -webkit-background-clip: text;
       animation: backgroundWave 10s ease infinite;
+
+      @media screen and (max-width: 374px) {
+        margin-left: 0;
+      }
     }
   }
 
   &__logo {
     max-width: 6rem;
     animation: spin 5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+
+    @media screen and (max-width: 374px) {
+      display: none;
+    }
   }
 
   &__slogan {
     margin-top: 2rem;
     font-size: 2rem;
     @include flexCenter();
+
+    @media screen and (max-width: 539px) {
+      margin-top: 1rem;
+    }
 
     i {
       font-size: 2rem;
@@ -165,9 +177,17 @@ a {
   padding-right: $padding;
   margin: 5rem auto 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   align-items: start;
   gap: 2.4rem;
+
+  @media screen and (max-width: 1023px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .image {
@@ -245,7 +265,7 @@ a {
 }
 
 .observer {
-  height: 200px;
+  height: 1000px;
 }
 
 .top {
@@ -260,9 +280,8 @@ a {
     font-size: 3rem;
     color: $color-white;
     opacity: 0.3;
-    transition: opacity 0.25s linear;
     transform: translateY(calc(100% + 5rem));
-    transition: transform 0.25s linear;
+    transition: all 0.25s linear;
     z-index: 10;
 
     &.show {

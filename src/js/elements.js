@@ -1,5 +1,5 @@
 export const header = document.querySelector('.header');
-export const [firstCol, secondCol, thirdCol] = [
+export const [firstCol, secondCol, thirdCol, fourthCol] = [
   ...document.querySelectorAll('.images__column'),
 ];
 export const observerEl = document.querySelector('.observer');
