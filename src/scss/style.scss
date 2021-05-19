@@ -265,7 +265,14 @@ a {
 }
 
 .observer {
-  height: 1000px;
+  height: 500px;
+
+  .loading {
+    padding: 10rem;
+    img {
+      margin: 0 auto;
+    }
+  }
 }
 
 .top {
@@ -303,4 +310,9 @@ a {
   background-color: rgba(#000, 0.4);
   @include flexCenter();
   display: none;
+}
+
+.loading-text {
+  text-align: center;
+  margin: 10rem 0;
 }

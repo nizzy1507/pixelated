@@ -9,6 +9,7 @@ import { createImage } from './createImage';
 
 import { headerTitle } from './elements';
 import { getJSON } from './helpers';
+import { createLoading, removeLoading } from './loading';
 
 function clearColumns() {
   document
@@ -19,6 +20,7 @@ function clearColumns() {
 export async function searchHandler(e) {
   try {
     e.preventDefault();
+    createLoading();
     setNextPage(true);
     setIsFirstIteration(true);
 
@@ -31,10 +33,10 @@ export async function searchHandler(e) {
     document.title = capitalizeValue;
 
     const { results } = await getJSON(
-        `${SEARCH_PATH}&page=1&per_page=${PER_PAGE}&query=${value}`
+      `${SEARCH_PATH}&page=1&per_page=${PER_PAGE}&query=${value}`
     );
 
-    if(!results) return;
+    if (!results) return;
 
     clearColumns();
 
@@ -43,10 +45,10 @@ export async function searchHandler(e) {
 
     await createImage(results);
     setIsFirstIteration(false);
+    removeLoading();
   } catch (e) {
     alert('There is something wrong when fetching images');
   }
-
 }
 
 export function changeShadow(e) {

@@ -19,42 +19,40 @@ import {
   backToTopBtn,
 } from './elements';
 import { createImage } from './createImage';
+import { createLoading, removeLoading } from './loading';
 
 async function firstLoadImages() {
   try {
+    createLoading();
     const data = await getJSON(`${API_PATH}&page=1&per_page=${PER_PAGE}`);
 
     await createImage(data);
     setIsFirstIteration(false);
+    removeLoading();
 
     observer.observe(observerEl); // Observe the element after loading all images from first iteration
   } catch (e) {
     alert('There is something wrong when fetching images');
   }
-
-
 }
 
 async function loadMoreImage() {
   try {
     setNextPage();
-    console.log('hello');
-
     const data = await getJSON(
-        currentSearchTerm
-            ? `${SEARCH_PATH}&page=${page}&per_page=${PER_PAGE}&query=${currentSearchTerm}`
-            : `${API_PATH}&page=${page}&per_page=${PER_PAGE}`
+      currentSearchTerm
+        ? `${SEARCH_PATH}&page=${page}&per_page=${PER_PAGE}&query=${currentSearchTerm}`
+        : `${API_PATH}&page=${page}&per_page=${PER_PAGE}`
     );
 
     const moreImgsArr = currentSearchTerm ? data.results : data;
 
-    if(!moreImgsArr) return;
+    if (!moreImgsArr) return;
 
     createImage(moreImgsArr);
   } catch (e) {
     alert('There is something wrong when fetching images');
   }
-
 }
 
 function loadMore(entries) {
